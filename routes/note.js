@@ -1,4 +1,5 @@
 const express = require("express");
+const app = express();
 const fs = require("fs");
 const route = express.Router();
 const dataPathName = "./db/db.json";
@@ -12,6 +13,10 @@ route.get("/", (req, res) => {
             res.json(JSON.parse(data));
         }
     });
+});
+
+route.post("/", (req, res) => {
+    console.log(req.body);
 });
 
 module.exports = route;
