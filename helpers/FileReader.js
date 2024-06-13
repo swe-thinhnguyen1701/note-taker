@@ -1,17 +1,18 @@
-const fs = require("fs");
-const file = "../db/db.json";
+const { readFile } = require("node:fs/promises");
+const file = "./db/db.json";
 
 
 class FileReader {
     constructor() { }
 
-    getData() {
-        return fs.readFile(file, "utf8", (err, data) => {
-            if (err) {
-                console.log("Error occurs while reading file");
-            }
-            return data;
-        });
+    async getData() {
+        try{
+            const data = await readFile(file, { encoding: "utf8"});
+            return JSON.parse(data);
+        }catch(err){
+            console.log("ERROR occurs while reading file\n", err);
+            return `[]`;
+        }
     }
 }
 
