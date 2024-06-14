@@ -19,8 +19,11 @@ route.post("/", (req, res) => {
 });
 
 route.delete("/:id", (req, res) => {
-    const id = req.body.id;
+    const id = req.params.id;
+    console.log(JSON.stringify(id));
     crud.delete(id);
+
+    res.json(`Remove ${id}!`);
 });
 
 module.exports = route;
