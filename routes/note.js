@@ -10,9 +10,12 @@ route.get("/", (req, res) => {
 });
 
 route.post("/", (req, res) => {
-    const status = crud.insert(req.body);
-    console.log(req.body);
+    const newNote = req.body;
+    const status = crud.insert(newNote);
+    console.log(newNote);
     console.log(status);
+
+    res.json(newNote);
 });
 
 route.delete("/:id", (req, res) => {

@@ -36,14 +36,15 @@ const getNotes = () =>
     }
   });
 
-const saveNote = (note) =>
-   fetch('/api/notes', {
+const saveNote = (note) =>{
+  fetch('/api/notes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(note)
   });
+}
 
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
@@ -72,15 +73,18 @@ const renderActiveNote = () => {
   }
 };
 
-const handleNoteSave = () => {
+const handleNoteSave = async () => {
   const newNote = {
     title: noteTitle.value,
     text: noteText.value
   };
-  saveNote(newNote).then( async () => {
-    await getAndRenderNotes();
-    await renderActiveNote();
-  });
+  console.log("new note: ", newNote);
+  
+  const res = await saveNote(newNote);
+  console.log("save response: ", res);
+
+  await getAndRenderNotes();
+  renderActiveNote();
 };
 
 // Delete the clicked note
@@ -186,7 +190,10 @@ const renderNoteList = async (notes) => {
 };
 
 // Gets notes from the db and renders them to the sidebar
-const getAndRenderNotes = () => getNotes().then(res => renderNoteList(res));
+const getAndRenderNotes = async () => {
+  const notes = await getNotes();
+  await renderNoteList(notes);
+}
 
 if (window.location.pathname === '/notes.html') {
   saveNoteBtn.addEventListener('click', handleNoteSave);

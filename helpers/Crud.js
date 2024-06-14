@@ -4,7 +4,6 @@ const FileReader = require("./FileReader");
 const FileWriter = require("./FileWriter");
 
 const fileReader = new FileReader();
-const fileWriter = new FileWriter();
 
 class Crud {
     constructor() { 
@@ -54,9 +53,9 @@ class Crud {
         return `${this.DATA_BASE.length}`;
     }
 
-    writeDataBase(){
+    async writeDataBase(){
         const fileWriter = new FileWriter(JSON.stringify(this.DATA_BASE));
-        fileWriter.saveData();
+        await fileWriter.saveData();
     }
 }
 
