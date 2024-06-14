@@ -36,13 +36,17 @@ class Crud {
     delete (id){
         if(id < this.DATA_BASE.length || id >= this.DATA_BASE.length)
             return `Item with id(${id}) not found`;
-        const lastIdx = this.DATA_BASE.length - 1;
-        this.DATA_BASE[id] =  this.DATA_BASE[lastIdx];
-        this.DATA_BASE.pop();
+        const updateDB = this.DATA_BASE.filter(data => data.id !== id);
+        console.log(JSON.stringify(updateDB));
+        this.DATA_BASE = updateDB;
+
+        this.writeDataBase();
+
         return `Item with ID(${id}) is DELETED`;
     }
 
     getDataBase() {
+        this.loadData();
         return this.DATA_BASE;
     }
 

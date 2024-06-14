@@ -37,7 +37,7 @@ const getNotes = () =>
   });
 
 const saveNote = (note) =>
-  fetch('/api/notes', {
+   fetch('/api/notes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -77,9 +77,9 @@ const handleNoteSave = () => {
     title: noteTitle.value,
     text: noteText.value
   };
-  saveNote(newNote).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
+  saveNote(newNote).then( async () => {
+    await getAndRenderNotes();
+    await renderActiveNote();
   });
 };
 
@@ -104,6 +104,7 @@ const handleNoteDelete = (e) => {
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
   e.preventDefault();
+  // console.log(e.target.parentElement.getAttribute('data-note'));
   activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
   renderActiveNote();
 };
@@ -130,8 +131,9 @@ const handleRenderBtns = () => {
 // Render the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
+  // console.log(jsonNotes);
   if (window.location.pathname === '/notes.html') {
-    console.log(noteList);
+    // console.log(noteList);
     noteList.innerHTML = "";
     // noteList.forEach((el) => (el.innerHTML = ''));
   }

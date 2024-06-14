@@ -10,9 +10,8 @@ class FileWriter {
 
     saveData() {
         fs.writeFile(DESTINATION, this.data, error => {
-            error ? console.log("ERROR while writing") : console.log(`new data is saved!`);
+            error ? console.log("Error while writing file") : console.log("New data is saved");;
         });
-
     }
 }
 
