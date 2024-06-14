@@ -12,15 +12,12 @@ route.get("/", (req, res) => {
 route.post("/", (req, res) => {
     const newNote = req.body;
     const status = crud.insert(newNote);
-    console.log(newNote);
-    console.log(status);
 
     res.json(newNote);
 });
 
 route.delete("/:id", (req, res) => {
     const id = req.params.id;
-    console.log(JSON.stringify(id));
     crud.delete(id);
 
     res.json(`Remove ${id}!`);

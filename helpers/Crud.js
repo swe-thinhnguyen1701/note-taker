@@ -15,9 +15,7 @@ class Crud {
         try{
             const data = await fileReader.getData();
             this.DATA_BASE = JSON.parse(data) || [];
-            // console.log(`fetching DATA: ${this.DATA_BASE}`);
         }catch (error){
-            console.log("LOADING data fails\n", error);
             this.DATA_BASE = [];
         }
     }
@@ -33,9 +31,7 @@ class Crud {
     }
 
     delete (id){
-        console.log(`DELETE recieved ${id}`);
         const updateDB = this.DATA_BASE.filter(data => data.id !== id);
-        // console.log(JSON.stringify(updateDB));
         this.DATA_BASE = updateDB;
 
         this.writeDataBase();

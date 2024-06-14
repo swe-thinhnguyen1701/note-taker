@@ -78,11 +78,8 @@ const handleNoteSave = async () => {
     title: noteTitle.value,
     text: noteText.value
   };
-  console.log("new note: ", newNote);
   
   const res = await saveNote(newNote);
-  console.log("save response: ", res);
-
   await getAndRenderNotes();
   renderActiveNote();
 };
@@ -94,7 +91,6 @@ const handleNoteDelete = (e) => {
 
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
-  console.log(noteId);
 
   if (activeNote.id === noteId) {
     activeNote = {};
@@ -109,7 +105,6 @@ const handleNoteDelete = (e) => {
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
   e.preventDefault();
-  // console.log(e.target.parentElement.getAttribute('data-note'));
   activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
   renderActiveNote();
 };
@@ -136,11 +131,8 @@ const handleRenderBtns = () => {
 // Render the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
-  // console.log(jsonNotes);
   if (window.location.pathname === '/notes.html') {
-    // console.log(noteList);
     noteList.innerHTML = "";
-    // noteList.forEach((el) => (el.innerHTML = ''));
   }
 
   let noteListItems = [];
