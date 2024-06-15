@@ -1,7 +1,7 @@
-const { json } = require("express");
 const data= require("../db/db.json");
 const FileReader = require("./FileReader");
 const FileWriter = require("./FileWriter");
+const idGenerator = require("./idGenerator");
 
 const fileReader = new FileReader();
 
@@ -22,7 +22,8 @@ class Crud {
 
     insert(data) {
         this.data = data;
-        this.data.id = this.generateNewId();
+        const id = idGenerator();
+        this.data.id = id;
         this.DATA_BASE.push(this.data);
 
         this.writeDataBase();
