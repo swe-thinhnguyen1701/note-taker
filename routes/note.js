@@ -13,7 +13,7 @@ route.post("/", (req, res) => {
     const newNote = req.body;
     const status = crud.insert(newNote);
 
-    res.json(newNote);
+    res.json(status);
 });
 
 route.delete("/:id", (req, res) => {
